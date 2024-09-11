@@ -46,7 +46,7 @@ class TestNameValidation(unittest.TestCase):
         self.assertFalse(is_valid_mobile("91 99198198"))
         
     def test_valid_password(self):
-        """Test a valid password with at least 8 characters and one uppercase letter."""
+        """Test a valid password with at least 8 characters, one uppercase letter, and one numeric digit."""
         self.assertTrue(is_valid_password("Password123"))
 
     def test_invalid_password_too_short(self):
@@ -57,9 +57,13 @@ class TestNameValidation(unittest.TestCase):
         """Test an invalid password that has no uppercase letter."""
         self.assertFalse(is_valid_password("password123"))
 
-    def test_invalid_password_no_uppercase_and_short(self):
-        """Test an invalid password that is shorter than 8 characters and has no uppercase letter."""
-        self.assertFalse(is_valid_password("pass1"))          
+    def test_invalid_password_no_digit(self):
+        """Test an invalid password that has no numeric digit."""
+        self.assertFalse(is_valid_password("Password"))
+
+    def test_invalid_password_no_uppercase_and_no_digit(self):
+        """Test an invalid password that has no uppercase letter and no numeric digit."""
+        self.assertFalse(is_valid_password("password"))     
       
 
 
