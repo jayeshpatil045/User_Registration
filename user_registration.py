@@ -8,9 +8,10 @@
 
 '''
 import re
-import logging
+import unittest
+import logger
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logger.logger_init('user_registration')
 
 def is_valid_first_name(first_name):
     """
@@ -29,10 +30,10 @@ def is_valid_first_name(first_name):
     """
     pattern = r"^[A-Z][a-zA-Z]{2,}$"
     if re.match(pattern, first_name):
-        logging.info(f"Valid first name entered: {first_name}")
+        logger.info(f"Valid first name entered: {first_name}")
         return True
     else:
-        logging.error(f"Invalid first name: {first_name}. It should start with a capital letter and be at least 3 characters long.")
+        logger.error(f"Invalid first name: {first_name}. It should start with a capital letter and be at least 3 characters long.")
         return False
 
 def main():
