@@ -78,20 +78,42 @@ def is_valid_mobile(mobile):
         logger.error(f"Invalid mobile number: {mobile}. It should follow the format '91 9919819801'.")
         return False
 
+def is_valid_password(password):
+    """
+        Description:
+            Validates if the password meets the pre-defined rules.
+            Rule1: Password must have a minimum of 8 characters.
+
+        Parameters:
+            password (str): The password input by the user.
+
+        Returns:
+            True if the password is valid, False otherwise.
+    """
+    if len(password) < 8:
+        logger.error(f"Invalid password: {password}. Password must be at least 8 characters long.")
+        return False
+    else:
+        logger.info(f"Valid password entered.")
+        return True        
+
 def main():
     first_name = input("Enter your first name: ")
     last_name = input("Enter your last name: ")
     email = input("Enter your email: ")
     mobile = input("Enter your mobile number (e.g., 91 9919819801): ")
+    password = input("Enter your password: ")
     
     valid_first_name = is_valid_name(first_name,"first")
     valid_last_name = is_valid_name(last_name,"Last")
     valid_email = is_valid_email(email)
     valid_mobile = is_valid_mobile(mobile)
+    valid_password = is_valid_password(password)
+
 
     
-    if valid_first_name and valid_last_name and valid_email and valid_mobile:
-        logger.info(f"User successfully registered with First Name: {first_name}, and Last Name: {last_name}, and email : {email}, and Mobile: {mobile}")
+    if valid_first_name and valid_last_name and valid_email and valid_mobile and valid_password:
+        logger.info(f"User successfully registered with First Name: {first_name}, and Last Name: {last_name}, and email : {email}, and Mobile: {mobile}, and Password: {password}")
     else:
         logger.error(f"Registration failed due to invalid inputs.")    
 
