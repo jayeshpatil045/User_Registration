@@ -44,13 +44,22 @@ class TestNameValidation(unittest.TestCase):
     def test_invalid_mobile_too_short(self):
         """Test an invalid mobile number with less than 10 digits."""
         self.assertFalse(is_valid_mobile("91 99198198"))
+        
     def test_valid_password(self):
-        """Test a valid password with at least 8 characters."""
+        """Test a valid password with at least 8 characters and one uppercase letter."""
         self.assertTrue(is_valid_password("Password123"))
 
     def test_invalid_password_too_short(self):
-        """Test an invalid password with less than 8 characters."""
-        self.assertFalse(is_valid_password("Pass12"))        
+        """Test an invalid password that is shorter than 8 characters."""
+        self.assertFalse(is_valid_password("Pass1"))
+
+    def test_invalid_password_no_uppercase(self):
+        """Test an invalid password that has no uppercase letter."""
+        self.assertFalse(is_valid_password("password123"))
+
+    def test_invalid_password_no_uppercase_and_short(self):
+        """Test an invalid password that is shorter than 8 characters and has no uppercase letter."""
+        self.assertFalse(is_valid_password("pass1"))          
       
 
 
