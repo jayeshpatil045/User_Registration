@@ -43,7 +43,11 @@ def is_valid_email(email):
             Mandatory parts: abc, bl, co
             Optional parts: xyz, in
             Example: abc.xyz@bl.co.in
-        Parameters:    
+        Parameters:  
+            email (str): The email input by the user. 
+            
+        Returns:
+            True if the name is valid, False otherwise.     
             
     """
     pattern = r"^[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)?@[a-zA-Z0-9]+\.[a-zA-Z]{2,3}(\.[a-zA-Z]{2,3})?$"
