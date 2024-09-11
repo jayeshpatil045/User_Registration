@@ -36,16 +36,36 @@ def is_valid_name(name,name_type):
     else:
         logger.error(f"Invalid {name_type}: {name}. It should start with a capital letter and be at least 3 characters long.")
         return False
+def is_valid_email(email):
+    """
+        Description:
+            Validates the email based on the given format.
+            Mandatory parts: abc, bl, co
+            Optional parts: xyz, in
+            Example: abc.xyz@bl.co.in
+        Parameters:    
+            
+    """
+    pattern = r"^[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)?@[a-zA-Z0-9]+\.[a-zA-Z]{2,3}(\.[a-zA-Z]{2,3})?$"
+    if re.match(pattern, email):
+        logger.info(f"Valid email entered: {email}")
+        return True
+    else:
+        logger.error(f"Invalid email: {email}. Email should follow the format abc.xyz@bl.co.in")
+        return False
+
 
 def main():
     first_name = input("Enter your first name: ")
     last_name = input("Enter your last name: ")
+    email = input("Enter your email: ")
     
     valid_first_name = is_valid_name(first_name,"first")
     valid_last_name = is_valid_name(last_name,"Last")
+    valid_email = is_valid_email(email)
     
-    if valid_first_name and valid_last_name:
-        logger.info(f"User successfully registered with First Name: {first_name} and Last Name: {last_name}")
+    if valid_first_name and valid_last_name and valid_email:
+        logger.info(f"User successfully registered with First Name: {first_name} and Last Name: {last_name} and email : {email}")
     else:
         logger.error(f"Registration failed due to invalid inputs.")    
 
