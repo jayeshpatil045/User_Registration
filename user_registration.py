@@ -91,7 +91,7 @@ def is_valid_password(password):
         Returns:
             True if the password is valid, False otherwise.
     """
-    pattern = r'^(?=.*[A-Z]).{8,}$'
+    pattern = r'^(?=.*[A-Z])(?=.*\d).{8,}$'
     
     if re.match(pattern, password):
         logger.info(f"Valid password entered.")
@@ -101,8 +101,10 @@ def is_valid_password(password):
             logger.error(f"Invalid password: {password}. Password must be at least 8 characters long.")
         if not re.search(r'[A-Z]', password):
             logger.error(f"Invalid password: {password}. Password must contain at least one uppercase letter.")
-        return False      
-
+        if not re.search(r'\d', password):
+            logger.error(f"Invalid password: {password}. Password must contain at least one numeric digit.")
+        return False
+        
 def main():
     first_name = input("Enter your first name: ")
     last_name = input("Enter your last name: ")
