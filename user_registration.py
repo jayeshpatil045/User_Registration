@@ -83,6 +83,7 @@ def is_valid_password(password):
         Description:
             Validates if the password meets the pre-defined rules.
             Rule1: Password must have a minimum of 8 characters.
+            Rule 2: Password must contain at least 1 uppercase letter.
 
         Parameters:
             password (str): The password input by the user.
@@ -90,12 +91,17 @@ def is_valid_password(password):
         Returns:
             True if the password is valid, False otherwise.
     """
-    if len(password) < 8:
-        logger.error(f"Invalid password: {password}. Password must be at least 8 characters long.")
-        return False
-    else:
+    pattern = r'^(?=.*[A-Z]).{8,}$'
+    
+    if re.match(pattern, password):
         logger.info(f"Valid password entered.")
-        return True        
+        return True
+    else:
+        if len(password) < 8:
+            logger.error(f"Invalid password: {password}. Password must be at least 8 characters long.")
+        if not re.search(r'[A-Z]', password):
+            logger.error(f"Invalid password: {password}. Password must contain at least one uppercase letter.")
+        return False      
 
 def main():
     first_name = input("Enter your first name: ")
