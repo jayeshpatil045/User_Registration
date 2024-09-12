@@ -84,6 +84,8 @@ def is_valid_password(password):
             Validates if the password meets the pre-defined rules.
             Rule1: Password must have a minimum of 8 characters.
             Rule 2: Password must contain at least 1 uppercase letter.
+            Rule 3: Password must contain at least 1 numeric digit (0-9).
+            Rule 4: Password must contain exactly 1 special character.
 
         Parameters:
             password (str): The password input by the user.
@@ -91,9 +93,11 @@ def is_valid_password(password):
         Returns:
             True if the password is valid, False otherwise.
     """
-    pattern = r'^(?=.*[A-Z]).{8,}$'
-    
-    if re.match(pattern, password):
+        # List of special characters for Rule 4
+    special_characters = r'[!@#$%^&*(),.?":{}|<>]'
+    # pattern = r'^(?=.*[A-Z])(?=.*\d)(?=.*[' + special_characters + r']).{8,}$'    
+    pattern = r'^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$'
+    if re.match(pattern, password) and len(re.findall(special_characters, password)) == 1:
         logger.info(f"Valid password entered.")
         return True
     else:
@@ -101,7 +105,11 @@ def is_valid_password(password):
             logger.error(f"Invalid password: {password}. Password must be at least 8 characters long.")
         if not re.search(r'[A-Z]', password):
             logger.error(f"Invalid password: {password}. Password must contain at least one uppercase letter.")
-        return False      
+        if not re.search(r'\d', password):
+            logger.error(f"Invalid password: {password}. Password must contain at least one numeric digit.")
+        if len(re.findall(special_characters, password)) != 1:
+            logger.error(f"Invalid password: {password}. Password must contain exactly one special character.")
+        return False  
 
 def main():
     first_name = input("Enter your first name: ")
