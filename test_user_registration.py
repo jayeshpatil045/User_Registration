@@ -31,7 +31,7 @@ class TestNameValidation(unittest.TestCase):
      
     def test_valid_mobile(self):
         """Test a valid mobile number format."""
-        self.assertTrue(is_valid_mobile("91 9919819801"))
+        self.assertTrue(is_valid_mobile("91 9370543097"))
 
     def test_invalid_mobile_no_country_code(self):
         """Test an invalid mobile number without the country code."""
@@ -43,25 +43,32 @@ class TestNameValidation(unittest.TestCase):
 
     def test_invalid_mobile_too_short(self):
         """Test an invalid mobile number with less than 10 digits."""
-        self.assertFalse(is_valid_mobile("91 99198198"))
+        self.assertFalse(is_valid_mobile("91 937054309"))
         
+
     def test_valid_password(self):
-        """Test a valid password with at least 8 characters and one uppercase letter."""
-        self.assertTrue(is_valid_password("Password123"))
+        """Test a valid password with at least 8 characters, one uppercase letter, one numeric digit, and exactly one special character."""
+        self.assertTrue(is_valid_password("Password1@"))
 
     def test_invalid_password_too_short(self):
         """Test an invalid password that is shorter than 8 characters."""
-        self.assertFalse(is_valid_password("Pass1"))
+        self.assertFalse(is_valid_password("Pass1@"))
 
     def test_invalid_password_no_uppercase(self):
         """Test an invalid password that has no uppercase letter."""
-        self.assertFalse(is_valid_password("password123"))
+        self.assertFalse(is_valid_password("password1@"))
 
-    def test_invalid_password_no_uppercase_and_short(self):
-        """Test an invalid password that is shorter than 8 characters and has no uppercase letter."""
-        self.assertFalse(is_valid_password("pass1"))          
-      
+    def test_invalid_password_no_digit(self):
+        """Test an invalid password that has no numeric digit."""
+        self.assertFalse(is_valid_password("Password@"))
 
+    def test_invalid_password_no_special_character(self):
+        """Test an invalid password that has no special character."""
+        self.assertFalse(is_valid_password("Password123"))
+
+    def test_invalid_password_more_than_one_special_character(self):
+        """Test an invalid password that has more than one special character."""
+        self.assertFalse(is_valid_password("Password1@#"))
 
 if __name__ == "__main__":
     unittest.main()
