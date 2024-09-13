@@ -8,7 +8,6 @@
 
 '''
 import re
-import unittest
 import logger
 
 logger = logger.logger_init('user_registration')
@@ -50,7 +49,8 @@ def is_valid_email(email):
             True if the name is valid, False otherwise.     
             
     """
-    pattern = r"^[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)?@[a-zA-Z0-9]+\.[a-zA-Z]{2,3}(\.[a-zA-Z]{2,3})?$"
+    pattern = r'^[a-zA-Z0-9]+([._%+-][a-zA-Z0-9]+)*@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$'
+
     if re.match(pattern, email):
         logger.info(f"Valid email entered: {email}")
         return True
@@ -95,8 +95,8 @@ def is_valid_password(password):
     """
         # List of special characters for Rule 4
     special_characters = r'[!@#$%^&*(),.?":{}|<>]'
-    # pattern = r'^(?=.*[A-Z])(?=.*\d)(?=.*[' + special_characters + r']).{8,}$'    
     pattern = r'^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$'
+    
     if re.match(pattern, password) and len(re.findall(special_characters, password)) == 1:
         logger.info(f"Valid password entered.")
         return True
